@@ -1,0 +1,10 @@
+.width100 {
+    width: 100%;
+}
+.width18rem {
+    width: 18rem;
+}
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul id="categories" class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" style="cursor:pointer" (click)="categoryClick()">Összes</a>
+        </li>
+        <li class="nav-item active" *ngFor="let category of categoryList | async">
+          <a class="nav-link" style="cursor:pointer" (click)="categoryClick(category.katID)">{{category.katNev}}</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <main>
+        <div class="row">
+            <div [ngClass]="news.vezetoHir ? '' : 'col-sm'" *ngFor="let news of newsList | async">
+                <a [ngClass]="news.vezetoHir ? 'width100' : 'width18rem'" style="cursor: pointer;text-decoration: none;" class="card"
+                  (click)="openNews(news.cikkID)">
+                    <img class="card-img-top" src="assets/A-team.jfif" alt="Card image cap">
+                    <div class="card-body">
+                      <div class="spaceBetween">
+                        <div>
+                          <h5 class="card-title">{{news.cikkCim}}</h5>
+                          <p class="card-text">{{news.cikkLead}}</p>
+                        </div>
+                        <div>
+                          <i class="fa-solid fa-pencil" style="cursor: pointer;" *ngIf="isLoggedIn" (click)="$event.stopPropagation();editClickHandler(news.cikkID)"></i>
+                          <i class="fa-solid fa-trash" style="cursor: pointer;" *ngIf="isLoggedIn" (click)="$event.stopPropagation();delete(news.cikkID)"></i>
+                        </div>
+                      </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+
+<app-footer></app-footer>
